@@ -1,0 +1,139 @@
+------------------------------------------------------------
+Individual packages (.dpkg,.rpm)
+------------------------------------------------------------
+											.DEB
+											.RPM
+installing using debian or redhat package manager, dependencies will not be downloaded, for example
+if iam installing tomcat8 using .deb package, for tocat8 to work, we need a dependency called java to be installed but what .deb will do is it will install
+only the .deb tocat8 because the .deb package contains only tomcat8
+
+											man dpkg | less
+											dpkg --print-architecture
+											man ls
+											man scp
+
+											wget https://packages.chef.io/files/stable/chefdk/4.3.13/ubuntu/16.04/chefdk_4.3.13-1_amd64.deb
+											dpkg -i chefdk_4.3.13-1_amd64.deb
+											dpkg -i (-i is for installation)
+											dpkg -r (-r is for uninstallation)
+											dpkg -l (to list all the installed packages)
+
+											whereis chef
+														chef: /usr/bin/chef /opt/chefdk/bin/chef
+
+											echo $PATH	-> path variable
+														/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+														ls -lart /usr/bin | grep chef ----> SIM LINK 
+																						chef -> /opt/chefdk/bin/chef
+											-------------------------------------------------------------------------------------------------------
+											man rpm
+											
+											rpm ivh https://packages.chef.io/files/stable/chefdk/4.3.13/el/8/chefdk-4.3.13-1.el7.x86_64.rpm
+											rpm -ql chef
+											whereis chef
+											echo $PATH
+											ls -lart /usr/bin | grep chef
+																		 chef-solo -> /opt/chef/bin/chef-solo
+sim link is nothing but a shortcut
+											rpm -qpr <.rpm> to check dependencies for .rpm package 
+											rpm -q | grep git - to check git installation
+											
+
+---------------------------------------------------------------------------------------
+Package Manage apt-get(debian based systems), yum(redhat based systems), snap(for both)
+---------------------------------------------------------------------------------------
+											apt-get install
+											
+						repository			cd /etc/apt
+											cat source-list ----> this the repository location to download the packages from
+											sudo add-apt-repository https://ahahjkalsnknsdn.com ---> to add a repository to search for softwares
+											
+											apt-get update -y
+											apt-get install -y
+											apt-cache search git
+											apt-cache madison git
+											apt-cache show git		after installation it will show
+											echo $PATH
+											ls -la /usr/bin | grep git
+												simlink will show  
+											
+											dpkg -l | grep git
+											dpkg -l | grep python
+											
+										
+					repository		cd /etc/yum/yum.rep.d
+									cat centos-sources.repo
+									yum update -y
+									yum install
+									yum search
+									
+											
+---------------------------------------------------------------------------------------
+tarballs nothing but archive files - tar.gz
+									 tar -xvf (unzip tarfile)
+.7z
+											wget https://**************.tar.gz
+											tar -xvf <name> - unzip
+----------------------------------------------------------------------------------------
+environmental variable (path) 
+						1. system variable called path variable
+						2. user variables 
+to add the crome browser to the environment variable
+right click my computer -> properties -> advance system -> enviroment variable
+no need to add the chrome.ece, just add the chrome directory (C:\Program Files (x86)\Google) --> refreshenv.cmd								
+
+											java -> java_home
+											maven -> maven_home
+											set
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ssh username@ipaddress
+ssh -i pemfile.pem username@ipadress
+
+ps
+ls -lart
+systemctl list-units --type=service --state=running
+
+cat /etc/passwd  - login shell
+sudo -i		to become a root user
+cd ~		to go to the home directory
+
+-----If you want to know what is your login shell-------
+vi /etc/passwd	->	usr/sbin/nologin	-	which means user cannot login
+					bin/bash
+					
+------ZSH Installation--------------------------
+centos	-	sudo yum install zsh -y
+ubuntu	-	sudo apt-get install zsh -y
+	root@ip-172-31-20-238:~# zsh
+	ip-172-31-20-238# ps $$
+	PID TTY      STAT   TIME COMMAND
+	13208 pts/0    S      0:00 zsh
+	ip-172-31-20-238#
+
+	ip-172-31-20-238# bash
+	root@ip-172-31-20-238:~# ps $$
+	PID TTY      STAT   TIME COMMAND
+	13212 pts/0    S      0:00 bash
+	root@ip-172-31-20-238:~#
+
+ps $$					
+ PID TTY      STAT   TIME COMMAND
+ 1921 pts/0    S      0:00 -bash
+--------------------------------------------------
+
