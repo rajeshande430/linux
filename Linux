@@ -6,7 +6,7 @@ Individual packages (.dpkg,.rpm)
 installing using debian or redhat package manager, dependencies will not be downloaded, for example
 if iam installing tomcat8 using .deb package, for tocat8 to work, we need a dependency called java to be installed but what .deb will do is it will install
 only the .deb tocat8 because the .deb package contains only tomcat8
-
+https://www.tecmint.com/dpkg-command-examples/
 											man dpkg | less
 											dpkg --print-architecture
 											man ls
@@ -26,8 +26,8 @@ only the .deb tocat8 because the .deb package contains only tomcat8
 														ls -lart /usr/bin | grep chef ----> SIM LINK 
 																						chef -> /opt/chefdk/bin/chef
 											-------------------------------------------------------------------------------------------------------
+https://www.tecmint.com/20-practical-examples-of-rpm-commands-in-linux/											
 											man rpm
-											
 											rpm ivh https://packages.chef.io/files/stable/chefdk/4.3.13/el/8/chefdk-4.3.13-1.el7.x86_64.rpm
 											rpm -ql chef
 											whereis chef
@@ -49,13 +49,14 @@ Package Manage apt-get(debian based systems), yum(redhat based systems), snap(fo
 											sudo add-apt-repository https://ahahjkalsnknsdn.com ---> to add a repository to search for softwares
 											
 											apt-get update -y
+											apt-get update && apt-get install tomcat8
 											apt-get install -y
 											apt-cache search git
 											apt-cache madison git
 											apt-cache show git		after installation it will show
 											echo $PATH
 											ls -la /usr/bin | grep git
-												simlink will show  
+simlink will show  
 											
 											dpkg -l | grep git
 											dpkg -l | grep python
@@ -86,7 +87,31 @@ no need to add the chrome.ece, just add the chrome directory (C:\Program Files (
 											maven -> maven_home
 											set
 --------------------------------------------------------------
+DEAMONS OR SERVICES
+--------------------------------------------------------------
+service of 2 types
+				1. system services - ping - whenever you ping request
+				2. application services - apache2 always should be running 
+2 modes of running all applications that if 
+				1. foreground (ping,u can see the results)
+				2. background
+deamon has to run all the time example: webservers, database servers etc.
+			
+adding user --> 			adduser rajesh
+checking groups --> 		cat /etc/group
+adding user to group --> 	sudo usermod -aG tomcat8 rajesh
+know user group --> 		cat /etc/group | grep tomcat8
 
+							systemctl stop apache2
+							systemctl start apache2
+							systemctl restart apache2
+							systemctl reload apache2
+							systemctl enable apache2
+							systemctl status apache2
+
+							systemctl list-units --all
+							systemctl list-units --type=service --state=running
+							 systemctl list-units --type=service --state=inactive 
 
 
 
