@@ -23,10 +23,10 @@ https://www.tecmint.com/dpkg-command-examples/
 
 											echo $PATH	-> path variable
 														/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
-														ls -lart /usr/bin | grep chef ----> SIM LINK 
+														ls -lart /usr/bin | grep chef ----> SIM LINK
 																						chef -> /opt/chefdk/bin/chef
 											-------------------------------------------------------------------------------------------------------
-https://www.tecmint.com/20-practical-examples-of-rpm-commands-in-linux/											
+https://www.tecmint.com/20-practical-examples-of-rpm-commands-in-linux/
 											man rpm
 											rpm ivh https://packages.chef.io/files/stable/chefdk/4.3.13/el/8/chefdk-4.3.13-1.el7.x86_64.rpm
 											rpm -ql chef
@@ -35,19 +35,19 @@ https://www.tecmint.com/20-practical-examples-of-rpm-commands-in-linux/
 											ls -lart /usr/bin | grep chef
 																		 chef-solo -> /opt/chef/bin/chef-solo
 sim link is nothing but a shortcut
-											rpm -qpr <.rpm> to check dependencies for .rpm package 
+											rpm -qpr <.rpm> to check dependencies for .rpm package
 											rpm -q | grep git - to check git installation
-											
+
 
 ---------------------------------------------------------------------------------------
 Package Manage apt-get(debian based systems), yum(redhat based systems), snap(for both)
 ---------------------------------------------------------------------------------------
 											apt-get install
-											
+
 						repository			cd /etc/apt
 											cat source-list ----> this the repository location to download the packages from
 											sudo add-apt-repository https://ahahjkalsnknsdn.com ---> to add a repository to search for softwares
-											
+
 											apt-get update -y
 											apt-get update && apt-get install tomcat8
 											apt-get install -y
@@ -56,19 +56,19 @@ Package Manage apt-get(debian based systems), yum(redhat based systems), snap(fo
 											apt-cache show git		after installation it will show
 											echo $PATH
 											ls -la /usr/bin | grep git
-simlink will show  
-											
+simlink will show
+
 											dpkg -l | grep git
 											dpkg -l | grep python
-											
-										
+
+
 					repository		cd /etc/yum/yum.rep.d
 									cat centos-sources.repo
 									yum update -y
 									yum install
 									yum search
-									
-											
+
+
 ---------------------------------------------------------------------------------------
 tarballs nothing but archive files - tar.gz
 									 tar -xvf (unzip tarfile)
@@ -76,45 +76,98 @@ tarballs nothing but archive files - tar.gz
 											wget https://**************.tar.gz
 											tar -xvf <name> - unzip
 ----------------------------------------------------------------------------------------
-environmental variable (path) 
+environmental variable (path)
 						1. system variable called path variable
-						2. user variables 
+						2. user variables
 to add the crome browser to the environment variable
 right click my computer -> properties -> advance system -> enviroment variable
-no need to add the chrome.ece, just add the chrome directory (C:\Program Files (x86)\Google) --> refreshenv.cmd								
+no need to add the chrome.ece, just add the chrome directory (C:\Program Files (x86)\Google) --> refreshenv.cmd
 
 											java -> java_home
 											maven -> maven_home
 											set
+Environment Commands:
+  show-environment                Dump environment
+  set-environment NAME=VALUE...   Set one or more environment variables
+  unset-environment NAME...       Unset one or more environment variables
+  import-environment [NAME...]    Import all or some environment variables
+
 --------------------------------------------------------------
 DEAMONS OR SERVICES
 --------------------------------------------------------------
 service of 2 types
 				1. system services - ping - whenever you ping request
-				2. application services - apache2 always should be running 
-2 modes of running all applications that if 
+				2. application services - apache2 always should be running
+2 modes of running all applications that if
 				1. foreground (ping,u can see the results)
 				2. background
 deamon has to run all the time example: webservers, database servers etc.
-			
+
 adding user --> 			adduser rajesh
 checking groups --> 		cat /etc/group
 adding user to group --> 	sudo usermod -aG tomcat8 rajesh
 know user group --> 		cat /etc/group | grep tomcat8
+add user to sudo group -->	visudo
+							# Allow members of group sudo to execute any command
+							%sudo   ALL=(ALL:ALL) ALL
+							jenkins ALL=(ALL:ALL) NOPASSWD:ALL
+user password authen -->	vi /etc/ssh/sshd_config
+							# To disable tunneled clear text passwords, change to no here!
+							PasswordAuthentication no
+	
 
 							systemctl stop apache2
 							systemctl start apache2
 							systemctl restart apache2
 							systemctl reload apache2
-							systemctl enable apache2
+							systemctl enable apache2  - whenever system restarts automatically this service will start.
 							systemctl status apache2
+							systemctl is-enabled apache2 - to know service status
+							systemctl list-dependencies apache2 -  to know all dependencies for service
 
+to work systemctl command there is a service called systemd, this deamon service should work all the time other wise systemctl will not work
 							systemctl list-units --all
 							systemctl list-units --type=service --state=running
-							 systemctl list-units --type=service --state=inactive 
+							systemctl list-units --type=service --state=inactive
+
+whenever we enable the service using systemctl enable apache2, a symlink will be created from
+																							/etc/systemd/system/multi-user.target.wants	to /usr/lib......
+													to check this we can use
+																			ls -la /usr/bin or lib/ | grep apache2
+
+CREATING JAVA APPLICATION AS A SERVICES
+
+all services are under this path 	/etc/systemd/system/multi-user.target.wants
+									systemctl list-units --all
+									systemctl status mysql.service
+										mysql.service - MySQL Community Server
+			sim link					Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: enabled)
+										Active: active (running) since Mon 2019-09-02 10:05:28 UTC; 3h 49min ago
+										Main PID: 10479 (mysqld)
+										Tasks: 27 (limit: 1152)
+										CGroup: /system.slice/mysql.service
+											   └─10479 /usr/sbin/mysqld --daemonize --pid-file=/run/mysqld/mysqld.pid
 
 
 
+
+Copy file from local machine to remote machine using SCP command
+scp -i .\iam.pem 'C:\Users\user\Downloads\spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar' ubuntu@52.34.0.42:/home/ubuntu
+
+
+[Unit]
+Description=A Spring Boot petclinic application
+After=syslog.target
+
+[Service]
+User=ubuntu
+ExecStart=/home/ubuntu/spring-petclinic.jar SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
+
+
+rename the file  --> mv oldname newname
 
 
 
@@ -141,7 +194,7 @@ cd ~		to go to the home directory
 -----If you want to know what is your login shell-------
 vi /etc/passwd	->	usr/sbin/nologin	-	which means user cannot login
 					bin/bash
-					
+
 ------ZSH Installation--------------------------
 centos	-	sudo yum install zsh -y
 ubuntu	-	sudo apt-get install zsh -y
@@ -157,7 +210,7 @@ ubuntu	-	sudo apt-get install zsh -y
 	13212 pts/0    S      0:00 bash
 	root@ip-172-31-20-238:~#
 
-ps $$					
+ps $$
  PID TTY      STAT   TIME COMMAND
  1921 pts/0    S      0:00 -bash
 --------------------------------------------------
