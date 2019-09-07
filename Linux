@@ -103,7 +103,9 @@ service of 2 types
 				2. background
 deamon has to run all the time example: webservers, database servers etc.
 
+ping command  --> ping -c4 google.com - which means 4 times
 adding user --> 			adduser rajesh
+reset userpasswd  -->		sudo passwd jenkins
 checking groups --> 		cat /etc/group
 adding user to group --> 	sudo usermod -aG tomcat8 rajesh
 know user group --> 		cat /etc/group | grep tomcat8
@@ -149,8 +151,6 @@ all services are under this path 	/etc/systemd/system/multi-user.target.wants
 											   └─10479 /usr/sbin/mysqld --daemonize --pid-file=/run/mysqld/mysqld.pid
 
 
-
-
 Copy file from local machine to remote machine using SCP command
 scp -i .\iam.pem 'C:\Users\user\Downloads\spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar' ubuntu@52.34.0.42:/home/ubuntu
 
@@ -167,17 +167,12 @@ ExecStart=/home/ubuntu/spring-petclinic.jar SuccessExitStatus=143
 WantedBy=multi-user.target
 
 
-rename the file  --> mv oldname newname
+mv oldname newname  --> rename the file
+du -sh /.m2	-->	to check the size of the folder
 
-
-
-
-
-
-
-
-
-
+firewall-cmd --zone=public --add-port=8080/tcp -permenant
+firewall-cmd --zone=public --add-service=http -permenant
+firewall-cmd --reload
 
 
 ssh username@ipaddress
