@@ -153,7 +153,7 @@ all services are under this path 	/etc/systemd/system/multi-user.target.wants
 
 Copy file from local machine to remote machine using SCP command
 scp -i .\iam.pem 'C:\Users\user\Downloads\spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar' ubuntu@52.34.0.42:/home/ubuntu
-
+cp -r <file.rar> \home\rajesh   -  to copy the file
 
 [Unit]
 Description=A Spring Boot petclinic application
@@ -181,6 +181,8 @@ ssh -i pemfile.pem username@ipadress
 ps
 ls -lart
 systemctl list-units --type=service --state=running
+systemctl status mysql.service
+systemctl status nginx.service
 
 cat /etc/passwd  - login shell
 sudo -i		to become a root user
@@ -208,5 +210,142 @@ ubuntu	-	sudo apt-get install zsh -y
 ps $$
  PID TTY      STAT   TIME COMMAND
  1921 pts/0    S      0:00 -bash
---------------------------------------------------
+ 
+----------------------------------------------------
+				SHELL SCRIPTING
+----------------------------------------------------
+what is shell ?  bash shell - born again shell
+what is variable ?
+
+kernel - shell will communicate to the kernel.
+linux has something called kernel which is like OS
+majority of the time we use bash shell which is called BORN AGAIN SHELL
+
+shell - bash / zsh (sudo apt-get install zsh -y | yum install zsh -y)
+secure shell - ssh (SSH SERVER - SSH CLIENT)
+
+to know the default shell or login shell - 
+ps $$		
+or
+cat /etc/passwd - ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
+	                     X - means the password
+						   userid
+						         groupid
+nano /etc/passwd - 
+vi /etc/passwd			- https://openvim.com/ vim usage url
+---------------------------------------------------------------------------------------------------
+				stream		file decsription		symbol
+Input stream	keyboard		0						<
+Output stream	monitor			1						>		redirect the standard output to the
+error stream	monitor			2						>		
+---------------------------------------------------------------------------------------------------
+ubuntu@ip-172-31-20-176:~$ echo helloo
+helloo
+ubuntu@ip-172-31-20-176:~$
+----------------------------
+ubuntu@ip-172-31-20-176:~$ echo helloo 1> /home/ubuntu/1.txt    or echo helloo > /home/ubuntu/1.txt
+ubuntu@ip-172-31-20-176:~$ ls -la
+total 80
+drwxr-xr-x 5 ubuntu ubuntu  4096 Sep 10 07:27 .
+drwxr-xr-x 5 root   root    4096 Sep 10 06:53 ..
+-rw-r--r-- 1 ubuntu ubuntu   220 Apr  4  2018 .bash_logout
+-rw-r--r-- 1 ubuntu ubuntu  3771 Apr  4  2018 .bashrc
+drwx------ 2 ubuntu ubuntu  4096 Sep 10 06:27 .cache
+drwx------ 3 ubuntu ubuntu  4096 Sep 10 06:27 .gnupg
+-rw-r--r-- 1 ubuntu ubuntu   807 Apr  4  2018 .profile
+drwx------ 2 ubuntu ubuntu  4096 Sep 10 06:23 .ssh
+-rw-r--r-- 1 ubuntu ubuntu     0 Sep 10 06:46 .sudo_as_admin_successful
+-rw-rw-r-- 1 ubuntu ubuntu 42275 Sep 10 06:52 .zcompdump
+-rw-rw-r-- 1 ubuntu ubuntu     7 Sep 10 07:27 1.txt
+ubuntu@ip-172-31-20-176:~$ cat 1.txt
+helloo
+ubuntu@ip-172-31-20-176:~$
+
+whenever we want to overwrite the files called as cloberring, (set -o noclobber)
+echo heloo >heloo.txt
+set -o noclobber
+echo heloo rajesh >heloo.txt
+-bash: heloo.txt: cannot overwrite existing file
+set +o noclobber
+
+example:
+			$ echo "Hello, world" >file.txt
+			$ cat file.txt
+			Hello, world
+			$ echo "This will overwrite the first greeting." >file.txt
+			$ cat file.txt
+			This will overwrite the first greeting.
+			$ set -o noclobber
+			$ echo "Can we overwrite it again?" >file.txt
+			-bash: file.txt: cannot overwrite existing file
+			$ echo "But we can use the >| operator to ignore the noclobber." >|file.txt
+			$ cat file.txt # Successfully overwrote the contents of file.txt using the >| operator
+			But we can use the >| operator to ignore the noclobber.
+			$ set +o noclobber # Changes setting back
+
+change of ownership commands
+sudo chown ubuntu:filename		- user
+sudo chown ubuntu:root filename - user:group	
+---------------------------------------------------------------------------------------------------
+COMMANDS		POSITIONAL ARGUMENTS	
+ls				/home/ubuntu  
+
+COMMANDS		NAMED ARGUMENTS	
+
+
+COMMANDS are called as executables
+ping
+ls
+
+ARGUMENTS are of 2 types, positional arguments & named arguments
+
+-----------------------------------------------------------------------------------------------------
+what is a shell script ?
+
+backup the files with some conditions
+	firstly we will create a text files with the following
+		text file	
+			shell commands
+			conditions
+			repetitions
+			arguments
+
+- 	rw-    rw-   r-- 1 ubuntu ubuntu   61 Sep 10 09:08 basic.sh
+	owner  group user
+r-4
+w-2
+x-1
+
+chmod 777
+chmod 400
+
+---------------------------------------------------------------------------------------------------
+INTERPRITOR	#!/bin/bash
+http://www.theunixschool.com/2011/01/positional-parameters-in-shell-script.html
+---------------------------------------------------------------------------------------------------
+		
+hashbang /bin/bash			#!/bin/bash		echo "heloo world"
+shebang	 /usr/bin/bash
+
+[root@gpr ~]# cat cmd
+#!/usr/bin/ksh
+
+Let us see this with an example:
+echo "The total no of args are: $#"
+echo "The script name is : $0"
+echo "The first argument is : $1"
+echo "The second argument is: $2"
+echo "The total argument list is: $*"
+echo "The total argument singlevalue is: $@"
+OUTPUT
+[root@gpr ~]# ./cmd 1 2 3 4
+The total no of args are: 4
+The script name is : ./cmd
+The first argument is : 1
+The second argument is: 2
+The total argument list is: 1 2 3 4
+[root@gpr ~]#
+
+
+
 
