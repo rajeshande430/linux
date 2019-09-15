@@ -284,8 +284,8 @@ example:
 			$ set +o noclobber # Changes setting back
 
 change of ownership commands
-sudo chown ubuntu:filename		- user
-sudo chown ubuntu:root filename - user:group	
+sudo chown ubuntu:filename			- user
+sudo chown ubuntu:root filename 	- user:group	
 ---------------------------------------------------------------------------------------------------
 COMMANDS		POSITIONAL ARGUMENTS	
 ls				/home/ubuntu  
@@ -346,6 +346,52 @@ The second argument is: 2
 The total argument list is: 1 2 3 4
 [root@gpr ~]#
 
+---------------------------------------------------------------------------------------------------
+ENVIRONMENT VARIABLES or SHELL VARIABLES (variables-it has a memory location that has some value)
+---------------------------------------------------------------------------------------------------
+SHELL VARIABLES - also called as local variables
 
+ENVIRONMENT VARIABLES
+
+~	- which means i am in a directory
+#	- which means i am a superuser
+
+itemcount=10 	- this step is called initialization
+echo $itemcount 
+10
+
+env or set
+
+name='rajeshande'
+echo $name
+
+bash/
+	name='rajeshande'
+	export
+	export name
+				zsh/
+					echo $name --> rajeshande
+								--> name='rajeshbabuande'
+									export name
+									exit
+	echo $name
+	rajeshande
+Example:
+	month='september'
+	year='2019'
+	echo $month $year > /home/ubuntu/result.txt
+
+video4.1 - 43mnt
+SYSTEM ENVIRONMENT VARIABLES | USER ENVIRONMENT VARIABLES
+/etc/profile
+/etc/profile.d
+
+creating enviroment variable ?
+cd /etc/profile.
+ls
+
+cd /etc/bash.bashrc
+
+				
 
 
