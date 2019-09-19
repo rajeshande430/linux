@@ -332,7 +332,7 @@ shebang	 /usr/bin/bash
 
 Let us see this with an example:
 echo "The total no of args are: $#"
-echo "The script name is : $0"
+echo "The script name & path is : $0"
 echo "The first argument is : $1"
 echo "The second argument is: $2"
 echo "The total argument list is: $*"
@@ -382,16 +382,25 @@ Example:
 	echo $month $year > /home/ubuntu/result.txt
 
 video4.1 - 43mnt
-SYSTEM ENVIRONMENT VARIABLES | USER ENVIRONMENT VARIABLES
-/etc/profile
-/etc/profile.d
+SYSTEM ENVIRONMENT VARIABLES 			|		 USER ENVIRONMENT VARIABLES
+/etc/profile.d									/.bashrc ---> export java_home="/usr/lib/jvm/java-11-openjdk-amd64"
+															  export PATH="$java_home/bin:$PATH"					
+--------------------------
 
-creating enviroment variable ?
-cd /etc/profile.
-ls
+--------------------------
 
-cd /etc/bash.bashrc
+ubuntu@ip-172-31-26-174:/usr/lib/jvm/java-8-openjdk-amd64$ pwd
+/usr/lib/jvm/java-8-openjdk-amd64
+ubuntu@ip-172-31-26-174:/usr/lib/jvm/java-8-openjdk-amd64$ echo $java_home
 
-				
+ubuntu@ip-172-31-26-174:/usr/lib/jvm/java-8-openjdk-amd64$ export java_home="/usr/lib/jvm/java-8-openjdk-amd64"
+ubuntu@ip-172-31-26-174:/usr/lib/jvm/java-8-openjdk-amd64$ echo $java_home
+/usr/lib/jvm/java-8-openjdk-amd64
+ubuntu@ip-172-31-26-174:/usr/lib/jvm/java-8-openjdk-amd64$ export PATH="$java_home/bin:$PATH"
+ubuntu@ip-172-31-26-174:/usr/lib/jvm/java-8-openjdk-amd64$ echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin
+			
+ update-java-alternatives --list
+ sudo update-alternatives --config java
 
-
+loops: for | while | until
